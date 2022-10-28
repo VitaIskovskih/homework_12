@@ -15,6 +15,7 @@ public class TestPosterManager {
     PosterData movies9 = new PosterData(19, 2022, "1928x.webp", "Море страха", "Триллер");
     PosterData movies10 = new PosterData(20, 2022, "1929x.webp", "Девушка в окне", "Ужасы");
 
+    //Вывод 5 фильмов порядке добавления
     @Test
     public void test1() {
         PosterManager repo = new PosterManager(5);
@@ -29,7 +30,7 @@ public class TestPosterManager {
 
         Assertions.assertArrayEquals(expected, actual);
     }
-
+    //Вывод по умолчанию последних 10 добавленных фильмов в порядке добавления
     @Test
     public void test2() {
         PosterManager repo = new PosterManager();
@@ -49,24 +50,39 @@ public class TestPosterManager {
 
         Assertions.assertArrayEquals(expected, actual);
     }
-
+    //Вывод 5 последних добавленных фильмов в обратном от добавления порядке когда добавленно больше лемита
     @Test
     public void test3() {
-        PosterManager repo = new PosterManager();
+        PosterManager repo = new PosterManager(5);
         repo.add(movies1);
         repo.add(movies2);
         repo.add(movies3);
         repo.add(movies4);
         repo.add(movies5);
+        repo.add(movies6);
+        repo.add(movies7);
 
-        PosterData[] expected = {movies5, movies4, movies3, movies2, movies1};
+        PosterData[] expected = {movies7, movies6, movies5, movies4, movies3};
         PosterData[] actual = repo.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
     }
-
+    //Вывод 5 последних добавленных фильмов в обратном от добавления порядке когда добавленно меньше лемита
     @Test
     public void test4() {
+        PosterManager repo = new PosterManager(5);
+        repo.add(movies1);
+        repo.add(movies2);
+        repo.add(movies3);
+
+        PosterData[] expected = {movies3, movies2, movies1};
+        PosterData[] actual = repo.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    //Вывод 10 последних добавленных фильмов в обратном от добавления порядке
+    @Test
+    public void test5() {
         PosterManager repo = new PosterManager();
         repo.add(movies1);
         repo.add(movies2);
